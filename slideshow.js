@@ -58,7 +58,7 @@ autoPlay.addEventListener("click", function autoNext() {
 stop.addEventListener("click", function stop() {
      clearTimeout(forward);
 });
-
+//auto back button
 let backward;
 autoBack.addEventListener("click", function autoBack() {
 
