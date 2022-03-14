@@ -1,77 +1,81 @@
+    let images = [
+      "masuria1.png",
+      "masuria2.jpeg",
+      "masuria3.jpeg",
+      "masuria4.jpeg",
+      "masuria5.jpeg",
+      "masuria6.jpeg",
+    ];
 
-let images = [
-  "https://images.unsplash.com/photo-1603477849227-705c424d1d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
-  "https://images.unsplash.com/photo-1543001907-bae0c9111c68?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1170&q=80",
-  "https://images.unsplash.com/photo-1535262412227-85541e910204?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=869&q=80",
-  "https://images.unsplash.com/photo-1579622754173-e2a9aad270e3?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=774&q=80",
-  "https://images.unsplash.com/photo-1622268875771-dbc0ffedfc17?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=1029&q=80",
-];
-
-let count = 0;
-let next = document.getElementById("nextBtn");
-let back = document.getElementById("backBtn");
-let slide = document.getElementById("slide");
-slide.src = images[count];
-
-let autoPlay = document.getElementById("autoPlay");
-let stop = document.getElementById("stop");
-let autoBack = document.getElementById("autoBack");
-
-//next button
-next.addEventListener("click", function goNext() {
- 
-  if (count < images.length - 1){
-    count++;
-  }
-    else{
-        count = 0;
-    }     
+    let count = 0;
+    let next = document.getElementById("nextBtn");
+    let back = document.getElementById("backBtn");
+    let slide = document.getElementById("slide");
     slide.src = images[count];
-});
 
-//back button
-back.addEventListener("click", function goBack() {
-  
-  if (count > 0) {
-    count--;
-  } 
-    else {
+    let autoPlay = document.getElementById("autoPlay");
+    let stop = document.getElementById("stop");
+    let autoBack = document.getElementById("autoBack");
+
+    //___________next button___________________________
+
+    next.addEventListener("click", function goNext() {
+      if (count < images.length - 1) {
+        count++;
+      } else {
+        count = 0;
+      }
+
+      slide.src = images[count];
+    });
+
+    //____________back button__________________________
+
+    back.addEventListener("click", function goBack() {
+      if (count > 0) {
+        count--;
+      } else {
         count = images.length - 1;
-    }
-  slide.src = images[count];
-});
+      }
 
-//autoplay button
-let forward;
-autoPlay.addEventListener("click", function autoNext() {
+      slide.src = images[count];
+    });
 
-  if (count < images.length - 1) {
-    count++;
-  } 
-    else {
-       count = 0;
-    }
-  slide.src = images[count];
-  forward = setTimeout(autoNext, 1000);
-});
+    //____________play button_______________________
 
-stop.addEventListener("click", function stop() {
-     clearTimeout(forward);
-});
-//auto back button
-let backward;
-autoBack.addEventListener("click", function autoBack() {
+    let forward;
+    autoPlay.addEventListener("click", function play() {
+      if (count < images.length - 1) {
+        count++;
+      } else {
+        count = 0;
+      }
 
-  if (count > 0) {
-    count--;
-  } 
-    else {
-       count = images.length - 1;
-    }
-  slide.src = images[count];
-  backward = setTimeout(autoBack, 1000);
-});
+      slide.src = images[count];
+      forward = setTimeout(play, 1000);
 
-stop.addEventListener("click", function stop() {
-     clearTimeout(backward);
-});
+      
+    });
+
+
+     stop.addEventListener("click", function stop() {
+       clearTimeout(forward);
+       clearTimeout(backward);
+     });
+
+
+    //_____________play back button______________________
+
+    let backward;
+    autoBack.addEventListener("click", function playBack() {
+      if (count > 0) {
+        count--;
+      } else {
+        count = images.length - 1;
+      }
+
+      slide.src = images[count];
+      backward = setTimeout(playBack, 1000);
+    });
+
+   
